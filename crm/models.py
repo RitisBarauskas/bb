@@ -160,7 +160,7 @@ class Price(models.Model):
         db_table = 'crm_price'
 
     def __str__(self):
-        return f'{self.master} - {self.service} | {self.cost}'
+        return f'{self.master} делает "{self.service}" за {self.cost}'
 
 
 class WorkingHours(models.Model):
@@ -190,7 +190,6 @@ class WorkingHours(models.Model):
 
     def __str__(self):
         return f'{self.master} - {self.entry}'
-
 
 class Register(models.Model):
     """
@@ -228,22 +227,17 @@ class Register(models.Model):
         'Date updating entry',
         auto_now=True,
     )
-    master = models.ForeignKey(
-        Master,
+    price = models.ForeignKey(
+        Price,
         on_delete=models.DO_NOTHING,
         null=False,
-        related_name='masters',
-    )
-    service = models.ForeignKey(
-        Service,
-        on_delete=models.DO_NOTHING,
-        null=False,
-        related_name='services',
+        related_name='price',
     )
     working_hour = models.ForeignKey(
         WorkingHours,
-        on_delete=models.DO_NOTHING,
         null=False,
+        on_delete=models.DO_NOTHING,
+        related_name='working_hours',
     )
     price_cost = models.SmallIntegerField(
         'Стоимость по прайсу',
@@ -285,4 +279,5 @@ class Register(models.Model):
         db_table = 'crm_register'
 
     def __str__(self):
-        return f'{self.working_hour.entry} - {self.master.name} - {self.client}'
+
+        return f'{self.working_hour.entry} - {self.price} - {self.client}'
