@@ -16,7 +16,6 @@ class UserCRM(AbstractUser):
         'telegram',
         max_length=100,
         blank=False,
-        default=None,
         unique=True,
     )
     phone = models.CharField(
@@ -43,8 +42,8 @@ class UserCRM(AbstractUser):
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'telegram']
 
     class Meta:
-        verbose_name = 'user'
-        verbose_name_plural = 'users'
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
         db_table = 'crm_user'
 
     def __str__(self):
@@ -88,8 +87,8 @@ class Master(models.Model):
     )
 
     class Meta:
-        verbose_name = 'master'
-        verbose_name_plural = 'masters'
+        verbose_name = 'Мастер'
+        verbose_name_plural = 'Мастера'
         db_table = 'crm_master'
 
     def __str__(self):
@@ -121,8 +120,8 @@ class Service(models.Model):
     )
 
     class Meta:
-        verbose_name = 'service'
-        verbose_name_plural = 'services'
+        verbose_name = 'Услуга'
+        verbose_name_plural = 'Услуги'
         db_table = 'crm_service'
 
     def __str__(self):
@@ -155,8 +154,8 @@ class Price(models.Model):
     )
 
     class Meta:
-        verbose_name = 'price'
-        verbose_name_plural = 'prices'
+        verbose_name = 'Стоимость'
+        verbose_name_plural = 'Стоимость'
         unique_together = 'master', 'service'
         db_table = 'crm_price'
 
