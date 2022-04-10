@@ -1,4 +1,4 @@
-from .models import UserCRM, Master, WorkingHours
+from .models import UserCRM, Master, WorkingHours, Price
 from rest_framework import serializers
 
 
@@ -17,4 +17,10 @@ class MasterSerializer(serializers.ModelSerializer):
 class WorkingHoursSerializer(serializers.ModelSerializer):
     class Meta:
         model = WorkingHours
+        fields = '__all__'
+
+
+class PriceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Price
         fields = '__all__'

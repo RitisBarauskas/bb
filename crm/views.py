@@ -1,9 +1,9 @@
 from datetime import datetime
 
-from .models import UserCRM, Master, WorkingHours
+from .models import UserCRM, Master, WorkingHours, Price
 from rest_framework import viewsets
 from rest_framework import permissions
-from .serializers import UserCRMSerializer, MasterSerializer, WorkingHoursSerializer
+from .serializers import UserCRMSerializer, MasterSerializer, WorkingHoursSerializer, PriceSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -32,3 +32,11 @@ class WorkingHoursViewSet(viewsets.ModelViewSet):
     serializer_class = WorkingHoursSerializer
     permission_classes = [permissions.AllowAny]
 
+
+class PriceViewSet(viewsets.ModelViewSet):
+    """
+    API всех стоимостей услуг
+    """
+    queryset = Price.objects.all()
+    serializer_class = PriceSerializer
+    permission_classes = [permissions.AllowAny]
