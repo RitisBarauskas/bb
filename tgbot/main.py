@@ -1,6 +1,5 @@
 import asyncio
 import logging
-from os import getenv
 
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher.filters import Text
@@ -8,10 +7,12 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types import BotCommand
+from aiogram.utils.callback_data import CallbackData
 
-TG_TOKEN = getenv('TG_TOKEN')
+from tgbot.config import TG_TOKEN
+from tgbot.helpers.api import get_masters
 
-masters = ["Ромыч", "Никитос"]
+
 dates = ['15.04', '16.04', '17.04', '18.04']
 times = ['10:00', '12:00', '15:30', '17:30']
 services = ['голову', 'голову с бородой']
@@ -27,15 +28,22 @@ class OrderTrim(StatesGroup):
     waiting_for_service = State()
 
 
+call_back_info = CallbackData('master_', "id")
+
+
 async def set_order_master(message: types.Message):
+    api_masters = await get_masters()
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    for master in masters:
-        keyboard.add(master)
+    for master in api_masters:
+        # keyboard.add(master['name'])
+        keyboard.add(types.InlineKeyboardButton(text=master['name'], callback_data=call_back_info.new(id=master['id'])))
     await message.answer("К кому пойдешь?", reply_markup=keyboard)
     await OrderTrim.waiting_for_master.set()
 
 
 async def set_order_date(message: types.Message, state: FSMContext):
+    api_masters = await get_masters()
+    masters = [master['name'] for master in api_masters]
     if message.text not in masters:
         await message.answer("Не понял, повтори. К кому идешь?")
         return

@@ -1,4 +1,4 @@
-from .models import UserCRM, Master, WorkingHours, Price
+from .models import UserCRM, Master, WorkingHours, Price, Service
 from rest_framework import serializers
 
 
@@ -15,12 +15,40 @@ class MasterSerializer(serializers.ModelSerializer):
 
 
 class WorkingHoursSerializer(serializers.ModelSerializer):
+
+    entry_hour = serializers.SerializerMethodField()
+
+    def get_entry_hour(self, obj):
+
+        return obj.entry.time()
+
     class Meta:
         model = WorkingHours
         fields = '__all__'
 
 
+class ServiceSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Service
+        fields = '__all__'
+
+
 class PriceSerializer(serializers.ModelSerializer):
+
+    service = ServiceSerializer()
+
     class Meta:
         model = Price
         fields = '__all__'
+
+
+class WorkingOnlyDatesSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор дат
+    """
+
+    class Meta:
+        model = WorkingHours
+        fields = ('entry_date',)
+

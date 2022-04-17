@@ -12,17 +12,23 @@ class UserCRM(AbstractUser):
         ADMIN = 'admin', 'Администратор'
         DIRECTOR = 'director', 'Директор'
 
+    chat_id = models.IntegerField(
+        'chat_id',
+        blank=True,
+        null=True,
+    )
+
     telegram = models.CharField(
         'telegram',
         max_length=100,
-        blank=False,
-        unique=True,
+        blank=True,
+        null=True,
     )
     phone = models.CharField(
         'phone',
         max_length=15,
-        blank=False,
         unique=True,
+        blank=False,
     )
     role = models.CharField(
         'role',
@@ -39,7 +45,7 @@ class UserCRM(AbstractUser):
     )
 
     USERNAME_FIELD = 'phone'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'telegram']
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
 
     class Meta:
         verbose_name = 'Пользователь'
@@ -175,6 +181,10 @@ class WorkingHours(models.Model):
     )
     entry = models.DateTimeField(
         'entry',
+        null=False,
+    )
+    entry_date = models.DateField(
+        'entry_date',
         null=False,
     )
     state = models.BooleanField(
