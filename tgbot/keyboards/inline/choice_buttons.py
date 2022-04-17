@@ -1,6 +1,6 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
-from tgbot.keyboards.inline.callback_datas import  master_callback, date_callback, hour_callback, service_callback
+from tgbot.keyboards.inline.callback_datas import master_callback, date_callback, hour_callback, service_callback
 
 
 def get_masters_keyboard(masters):

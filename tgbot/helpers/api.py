@@ -3,6 +3,33 @@ import requests as requests
 from tgbot.config import URL_API_CRM
 
 
+async def get_user(chat_id):
+    """
+    Получает пользователя
+    """
+
+    response = requests.get(URL_API_CRM + '/get-user/' + str(chat_id))
+
+    return response.json()
+
+
+async def ger_or_create_user(contact, chat):
+    """
+    Получает пользователя или создает нового
+    """
+
+    data = {
+        'phone': contact.phone_number,
+        'first_name': contact.first_name,
+        'last_name': contact.last_name,
+        'chat_id': contact.user_id,
+        'telegram': chat.username,
+    }
+
+    response = requests.post(f"{URL_API_CRM}/get-or-create-user", data=data)
+
+    return response.json()
+
 async def get_masters():
     """
     Получает список мастеров
@@ -43,3 +70,18 @@ async def get_masters_services(master_id):
     return response.json()
 
 
+async def create_register(user_id, master_id, working_hour_id, price_id):
+    """
+    Создает новую запись в БД
+    """
+
+    data = {
+        'user_id': user_id,
+        'master_id': master_id,
+        'working_hour_id': working_hour_id,
+        'price_id': price_id,
+    }
+
+    response = requests.post(f'{URL_API_CRM}/create-register', data=data)
+
+    return response.json()

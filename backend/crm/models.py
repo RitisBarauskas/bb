@@ -249,10 +249,6 @@ class Register(models.Model):
         on_delete=models.DO_NOTHING,
         related_name='working_hours',
     )
-    price_cost = models.SmallIntegerField(
-        'Стоимость по прайсу',
-        null=False,
-    )
     discount = models.FloatField(
         'Скидка',
         default=0,

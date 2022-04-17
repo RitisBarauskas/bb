@@ -1,4 +1,4 @@
-from .models import UserCRM, Master, WorkingHours, Price, Service
+from .models import UserCRM, Master, WorkingHours, Price, Service, Register
 from rest_framework import serializers
 
 
@@ -52,3 +52,12 @@ class WorkingOnlyDatesSerializer(serializers.ModelSerializer):
         model = WorkingHours
         fields = ('entry_date',)
 
+
+class RegisterSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор журнала записи
+    """
+
+    class Meta:
+        model = Register
+        fields = '__all__'

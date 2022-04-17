@@ -8,7 +8,7 @@ from .models import UserCRM, Master, WorkingHours, Price
 from rest_framework import viewsets, views, status
 from rest_framework import permissions
 from .serializers import UserCRMSerializer, MasterSerializer, WorkingHoursSerializer, PriceSerializer, \
-    WorkingOnlyDatesSerializer
+    WorkingOnlyDatesSerializer, RegisterSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -115,5 +115,99 @@ class PriceView(views.APIView):
             instance=queryset,
             many=True,
         )
+
+        return Response(serializer.data)
+
+
+class UserCRMView(views.APIView):
+    """
+    Получает или возвращает нового юзера
+    """
+
+    permission_classes = [permissions.AllowAny, ]
+
+    def get(self, request, pk=None):
+        if pk is None:
+            return Response('Некорректный запрос', status=status.HTTP_400_BAD_REQUEST)
+
+        queryset = UserCRM.objects.filter(chat_id=int(pk))
+
+        result = {'data': None}
+
+        if queryset.exists():
+            result = UserCRMSerializer(
+                instance=queryset,
+                many=True,
+            ).data[0]
+
+        return Response(result)
+
+
+class UserGetOrCreate(views.APIView):
+    """
+    Метод получения или регистрации пользователя
+    """
+
+    permission_classes = [permissions.AllowAny, ]
+
+    def post(self, request):
+
+        result = {'data': None}
+
+        phone = request.POST['phone']
+        chat_id = request.POST['chat_id']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        telegram = request.POST['telegram']
+
+        queryset = UserCRM.objects.filter(phone=phone)
+
+        if queryset.exists():
+            user = queryset.get()
+            user.chat_id = chat_id
+            user.first_name = first_name
+            user.last_name = last_name
+            user.telegram = telegram
+        else:
+            user = UserCRM(
+                chat_id=chat_id,
+                first_name=first_name,
+                last_name=last_name,
+                telegram=telegram,
+                phone=phone,
+            )
+
+        user.save()
+
+        return Response(user)
+
+
+class RegisterCreate(views.APIView):
+    """
+    Создает новую запись
+    """
+
+    permission_classes = [permissions.AllowAny, ]
+
+    def post(self, request):
+
+        client_id = request.POST['user_id']
+        master_id = request.POST['master_id']
+        working_hour_id = request.POST['working_hour_id']
+        price_id = request.POST['working_hour_id']
+
+        context = {'request': request}
+        data = {
+            'client': int(client_id),
+            'master': int(master_id),
+            'working_hour': int(working_hour_id),
+            'price': int(price_id),
+        }
+
+        serializer = RegisterSerializer(data=data, context=context)
+        if serializer.is_valid():
+            serializer.save()
+        else:
+            print(serializer)
 
         return Response(serializer.data)
