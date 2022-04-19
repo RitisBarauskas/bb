@@ -130,28 +130,23 @@ async def order_service(call: CallbackQuery, callback_data: dict, state: FSMCont
 @dp.callback_query_handler(service_callback.filter(), state=OrderTrim.waiting_for_service)
 async def order_service(call: CallbackQuery, callback_data: dict, state: FSMContext):
 
-    # await call.message.edit_reply_markup(reply_markup=None)
+    await call.message.edit_reply_markup(reply_markup=None)
     price_id = callback_data.get('id')
 
     order = await state.get_data()
-    master_id = order['master_id']
     working_hour_id = order['working_hour_id']
     user_id = order['user_id']
 
     await call.message.answer('Принято. Сейчас запишем...')
     logging.info(f"{callback_data}")
 
-    check_order = await create_register(user_id, master_id, working_hour_id, price_id)
+    check_order = await create_register(user_id, working_hour_id, price_id)
 
     try:
-        pass
+        if check_order['state'] == 'new_register':
+            call.message.answer(f'Готово.')
     except KeyError:
-        pass
-    # keyboard = get_services_keyboard(master_services)
-    #
-    # await call.message.answer(text="Что тебе нужно сделать?", reply_markup=keyboard)
-    # await OrderTrim.waiting_for_service.set()
-    #
+        call.message.answer('Возникла засада с записью. Попробуй чуть позже. Либо позвони Романычу, он все сделает.')
 
 
 @dp.callback_query_handler(text="cancel")

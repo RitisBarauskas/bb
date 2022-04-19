@@ -257,6 +257,7 @@ class Register(models.Model):
     total_sum = models.SmallIntegerField(
         'Стоимость услуги к оплате',
         blank=True,
+        null=True,
     )
     payment_type = models.CharField(
         'Способ оплаты',

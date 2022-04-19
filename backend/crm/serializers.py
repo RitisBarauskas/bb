@@ -1,3 +1,5 @@
+import datetime
+
 from .models import UserCRM, Master, WorkingHours, Price, Service, Register
 from rest_framework import serializers
 
@@ -53,10 +55,20 @@ class WorkingOnlyDatesSerializer(serializers.ModelSerializer):
         fields = ('entry_date',)
 
 
-class RegisterSerializer(serializers.ModelSerializer):
+class RegisterCreateSerializer(serializers.ModelSerializer):
     """
     Сериализатор журнала записи
     """
+
+    client = serializers.PrimaryKeyRelatedField(queryset=UserCRM.objects.all())
+    working_hour = serializers.PrimaryKeyRelatedField(queryset=WorkingHours.objects.filter(
+        state=True,
+        entry__gte=datetime.datetime.now(),
+    ).all())
+    price = serializers.PrimaryKeyRelatedField(queryset=Price.objects.all())
+
+    def create(self, validated_data):
+        return Register.objects.create(**validated_data)
 
     class Meta:
         model = Register

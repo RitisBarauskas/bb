@@ -70,14 +70,13 @@ async def get_masters_services(master_id):
     return response.json()
 
 
-async def create_register(user_id, master_id, working_hour_id, price_id):
+async def create_register(user_id, working_hour_id, price_id):
     """
     Создает новую запись в БД
     """
 
     data = {
         'user_id': user_id,
-        'master_id': master_id,
         'working_hour_id': working_hour_id,
         'price_id': price_id,
     }
