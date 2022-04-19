@@ -144,14 +144,12 @@ async def order_service(call: CallbackQuery, callback_data: dict, state: FSMCont
 
     try:
         if check_order['state'] == 'new_register':
-            call.message.answer(f'Готово.')
+            call.message.answer('Готово.')
     except KeyError:
         call.message.answer('Возникла засада с записью. Попробуй чуть позже. Либо позвони Романычу, он все сделает.')
 
 
 @dp.callback_query_handler(text="cancel")
 async def cancel_buying(call: CallbackQuery):
-    await call.answer("Вы отменили эту покупку!", show_alert=True)
-
-    # Вариант 1 - Отправляем пустую клваиатуру изменяя сообщение, для того, чтобы ее убрать из сообщения!
+    await call.answer("Процесс записи абортирован!", show_alert=True)
     await call.message.edit_reply_markup(reply_markup=None)
