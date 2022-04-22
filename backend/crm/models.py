@@ -12,18 +12,23 @@ class UserCRM(AbstractUser):
         ADMIN = 'admin', 'Администратор'
         DIRECTOR = 'director', 'Директор'
 
+    chat_id = models.IntegerField(
+        'chat_id',
+        blank=True,
+        null=True,
+    )
+
     telegram = models.CharField(
         'telegram',
         max_length=100,
-        blank=False,
-        default=None,
-        unique=True,
+        blank=True,
+        null=True,
     )
     phone = models.CharField(
         'phone',
         max_length=15,
-        blank=False,
         unique=True,
+        blank=False,
     )
     role = models.CharField(
         'role',
@@ -40,11 +45,11 @@ class UserCRM(AbstractUser):
     )
 
     USERNAME_FIELD = 'phone'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'telegram']
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
 
     class Meta:
-        verbose_name = 'user'
-        verbose_name_plural = 'users'
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
         db_table = 'crm_user'
 
     def __str__(self):
@@ -88,8 +93,8 @@ class Master(models.Model):
     )
 
     class Meta:
-        verbose_name = 'master'
-        verbose_name_plural = 'masters'
+        verbose_name = 'Мастер'
+        verbose_name_plural = 'Мастера'
         db_table = 'crm_master'
 
     def __str__(self):
@@ -121,8 +126,8 @@ class Service(models.Model):
     )
 
     class Meta:
-        verbose_name = 'service'
-        verbose_name_plural = 'services'
+        verbose_name = 'Услуга'
+        verbose_name_plural = 'Услуги'
         db_table = 'crm_service'
 
     def __str__(self):
@@ -155,13 +160,13 @@ class Price(models.Model):
     )
 
     class Meta:
-        verbose_name = 'price'
-        verbose_name_plural = 'prices'
+        verbose_name = 'Стоимость'
+        verbose_name_plural = 'Стоимость'
         unique_together = 'master', 'service'
         db_table = 'crm_price'
 
     def __str__(self):
-        return f'{self.master} - {self.service} | {self.cost}'
+        return f'{self.master} делает "{self.service}" за {self.cost}'
 
 
 class WorkingHours(models.Model):
@@ -178,6 +183,10 @@ class WorkingHours(models.Model):
         'entry',
         null=False,
     )
+    entry_date = models.DateField(
+        'entry_date',
+        null=False,
+    )
     state = models.BooleanField(
         'state',
         default=True,
@@ -191,7 +200,6 @@ class WorkingHours(models.Model):
 
     def __str__(self):
         return f'{self.master} - {self.entry}'
-
 
 class Register(models.Model):
     """
@@ -229,26 +237,17 @@ class Register(models.Model):
         'Date updating entry',
         auto_now=True,
     )
-    master = models.ForeignKey(
-        Master,
+    price = models.ForeignKey(
+        Price,
         on_delete=models.DO_NOTHING,
         null=False,
-        related_name='masters',
-    )
-    service = models.ForeignKey(
-        Service,
-        on_delete=models.DO_NOTHING,
-        null=False,
-        related_name='services',
+        related_name='price',
     )
     working_hour = models.ForeignKey(
         WorkingHours,
+        null=False,
         on_delete=models.DO_NOTHING,
-        null=False,
-    )
-    price_cost = models.SmallIntegerField(
-        'Стоимость по прайсу',
-        null=False,
+        related_name='working_hours',
     )
     discount = models.FloatField(
         'Скидка',
@@ -258,6 +257,7 @@ class Register(models.Model):
     total_sum = models.SmallIntegerField(
         'Стоимость услуги к оплате',
         blank=True,
+        null=True,
     )
     payment_type = models.CharField(
         'Способ оплаты',
@@ -286,4 +286,5 @@ class Register(models.Model):
         db_table = 'crm_register'
 
     def __str__(self):
-        return f'{self.working_hour.entry} - {self.master.name} - {self.client}'
+
+        return f'{self.working_hour.entry} - {self.price} - {self.client}'
