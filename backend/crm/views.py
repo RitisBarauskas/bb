@@ -5,7 +5,7 @@ from .models import UserCRM, Master, WorkingHours, Price
 from rest_framework import viewsets, views, status
 from rest_framework import permissions
 from .serializers import UserCRMSerializer, MasterSerializer, WorkingHoursSerializer, PriceSerializer, \
-    WorkingOnlyDatesSerializer, RegisterCreateSerializer
+    WorkingOnlyDatesSerializer, RegisterCreateSerializer, UserCreateOrUpdateSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -149,8 +149,6 @@ class UserGetOrCreate(views.APIView):
 
     def post(self, request):
 
-        result = {'data': None}
-
         phone = request.POST['phone']
         chat_id = request.POST['chat_id']
         try:
@@ -165,24 +163,29 @@ class UserGetOrCreate(views.APIView):
 
         queryset = UserCRM.objects.filter(phone=phone)
 
+        context = {'request': request}
+        data = {
+            'chat_id': chat_id,
+            'first_name': first_name,
+            'last_name': last_name,
+            'telegram': telegram,
+            'phone': phone,
+            'username': phone,
+        }
+
         if queryset.exists():
-            user = queryset.get()
-            user.chat_id = chat_id
-            user.first_name = first_name
-            user.last_name = last_name
-            user.telegram = telegram
-        else:
-            user = UserCRM(
-                chat_id=chat_id,
-                first_name=first_name,
-                last_name=last_name,
-                telegram=telegram,
-                phone=phone,
+            serializer = UserCreateOrUpdateSerializer(
+                instance=queryset.get(),
+                data=data,
+                context=context,
             )
+        else:
+            serializer = UserCreateOrUpdateSerializer(data=data, context=context)
 
-        user.save()
+        if serializer.is_valid():
+            serializer.save()
 
-        return Response(user)
+        return Response(serializer.data)
 
 
 class RegisterCreate(views.APIView):
@@ -208,7 +211,5 @@ class RegisterCreate(views.APIView):
         serializer = RegisterCreateSerializer(data=data, context=context)
         if serializer.is_valid():
             serializer.save()
-        else:
-            print(serializer)
 
         return Response(serializer.data)

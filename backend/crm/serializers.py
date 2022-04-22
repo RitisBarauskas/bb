@@ -73,3 +73,30 @@ class RegisterCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Register
         fields = '__all__'
+
+
+class UserCreateOrUpdateSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор создания или обновления пользователя
+    """
+
+    phone = serializers.CharField()
+    password = serializers.CharField(required=False)
+    username = serializers.CharField()
+    chat_id = serializers.CharField()
+
+    def create(self, validated_data):
+        return UserCRM.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.chat_id = validated_data.pop('chat_id')
+        instance.telegram = validated_data.pop('telegram')
+        instance.first_name = validated_data.pop('first_name')
+        instance.last_name = validated_data.pop('last_name')
+        instance.save()
+
+        return instance
+
+    class Meta:
+        model = UserCRM
+        fields = '__all__'
