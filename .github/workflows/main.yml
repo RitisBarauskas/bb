@@ -27,6 +27,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
+          context: backend
           tags: ritisbarauskas/bb_django:latest
   build_and_push_tg_bot_to_docker_hub:
     name: Push Docker image TG Bot to Docker Hub
@@ -50,6 +51,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
+          context: tgbot
           tags: ritisbarauskas/bb_tg_bot:latest
   deploy:
     runs-on: ubuntu-latest
