@@ -3,7 +3,7 @@ version: '3.3'
 services:
   db:
     image: postgres:14.0
-    container_name: postgresql
+    container_name: database
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     restart: always
@@ -14,6 +14,7 @@ services:
 
   backend:
     image: ritisbarauskas/bb_django:latest
+    container_name: backend
     restart: always
     depends_on:
       - db
@@ -25,6 +26,7 @@ services:
 
   tg_bot:
     image: ritisbarauskas/bb_tg_bot:latest
+    container_name: tg_bot
     restart: always
     depends_on:
       - db
