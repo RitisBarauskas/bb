@@ -1,6 +1,8 @@
 import requests as requests
+from decouple import config
 
-from tgbot.config import URL_API_CRM
+
+URL_API_CRM = config('URL_API_CRM')
 
 
 async def get_user(chat_id):
