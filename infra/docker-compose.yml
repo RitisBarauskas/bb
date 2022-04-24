@@ -23,6 +23,8 @@ services:
       - media_value:/code/dj_media/
     env_file:
       - ../.env
+    ports:
+      - 8000:8000
 
   tg_bot:
     image: ritisbarauskas/bb_tg_bot:latest
@@ -32,6 +34,8 @@ services:
       - db
     env_file:
       - ../.env
+    ports:
+      - 8008:8008
 
   nginx:
     image: nginx:1.19.3
