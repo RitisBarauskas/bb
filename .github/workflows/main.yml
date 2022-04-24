@@ -78,5 +78,8 @@ jobs:
             echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
             echo DB_HOST=${{ secrets.DB_HOST }} >> .env
             echo DB_PORT=${{ secrets.DB_PORT }} >> .env
+            echo TG_TOKEN=${{ secrets.TG_TOKEN }} >> .env
+            echo DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }} >> .env            
+            echo URL_API_CRM=${{ secrets.URL_API_CRM }} >> .env            
             cd infra
             docker-compose up -d
