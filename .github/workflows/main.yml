@@ -67,8 +67,8 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             cd bb/infra
-            docker pull ritisbarauskas/foodgram-backend:latest
-            docker pull ritisbarauskas/foodgram-frontend:v1.1
+            docker pull ritisbarauskas/bb_django:latest
+            docker pull ritisbarauskas/bb_tg_bot:latest
             docker-compose down
             cd ../
             touch .env
