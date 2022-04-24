@@ -45,7 +45,7 @@ class UserCRM(AbstractUser):
     )
 
     USERNAME_FIELD = 'phone'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+    REQUIRED_FIELDS = ['first_name']
 
     class Meta:
         verbose_name = 'Пользователь'

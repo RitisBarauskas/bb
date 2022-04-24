@@ -5,14 +5,14 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command, Text
 from aiogram.types import Message, CallbackQuery
 
-from tgbot.helpers.api import get_masters, get_masters_dates, get_masters_hours, get_masters_services, \
+from helpers.api import get_masters, get_masters_dates, get_masters_hours, get_masters_services, \
     get_user, ger_or_create_user, create_register
-from tgbot.helpers.states import OrderTrim
-from tgbot.keyboards.inline.callback_datas import master_callback, date_callback, hour_callback, service_callback
-from tgbot.keyboards.inline.choice_buttons import get_masters_keyboard, get_dates_keyboard, get_hours_keyboard, \
+from helpers.states import OrderTrim
+from keyboards.inline.callback_datas import master_callback, date_callback, hour_callback, service_callback
+from keyboards.inline.choice_buttons import get_masters_keyboard, get_dates_keyboard, get_hours_keyboard, \
     get_services_keyboard
-from tgbot.keyboards.reply_keyboard.choice_buttons import get_share_phone_keyboard
-from tgbot.loader import dp, bot
+from keyboards.reply_keyboard.choice_buttons import get_share_phone_keyboard
+from loader import dp, bot
 
 
 @dp.message_handler(content_types=['contact'])
