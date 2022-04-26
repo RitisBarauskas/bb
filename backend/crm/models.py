@@ -43,9 +43,15 @@ class UserCRM(AbstractUser):
         null=True,
         blank=True,
     )
+    username = models.CharField(
+        'username',
+        blank=True,
+        null=True,
+        max_length=150,
+    )
 
     USERNAME_FIELD = 'phone'
-    REQUIRED_FIELDS = ['first_name']
+    REQUIRED_FIELDS = ['first_name',]
 
     class Meta:
         verbose_name = 'Пользователь'
