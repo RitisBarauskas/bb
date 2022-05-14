@@ -27,9 +27,15 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'localhost',
+    'borisbritva.website',
+    'www.borisbritva.website',
+    '127.0.0.1',
+    '195.161.68.7',
+]
 
-
+CSRF_TRUSTED_ORIGINS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
