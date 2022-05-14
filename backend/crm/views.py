@@ -1,11 +1,13 @@
 from datetime import datetime
+
+from rest_framework import permissions, status, views, viewsets
 from rest_framework.response import Response
 
-from .models import UserCRM, Master, WorkingHours, Price
-from rest_framework import viewsets, views, status
-from rest_framework import permissions
-from .serializers import UserCRMSerializer, MasterSerializer, WorkingHoursSerializer, PriceSerializer, \
-    WorkingOnlyDatesSerializer, RegisterCreateSerializer, UserCreateOrUpdateSerializer
+from .models import Master, Price, UserCRM, WorkingHours
+from .serializers import (MasterSerializer, PriceSerializer,
+                          RegisterCreateSerializer,
+                          UserCreateOrUpdateSerializer, UserCRMSerializer,
+                          WorkingHoursSerializer, WorkingOnlyDatesSerializer)
 
 
 class UserViewSet(viewsets.ModelViewSet):

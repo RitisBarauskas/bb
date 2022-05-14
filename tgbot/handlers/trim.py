@@ -3,16 +3,19 @@ import logging
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command, Text
-from aiogram.types import Message, CallbackQuery
-
-from helpers.api import get_masters, get_masters_dates, get_masters_hours, get_masters_services, \
-    get_user, ger_or_create_user, create_register
+from aiogram.types import CallbackQuery, Message
+from helpers.api import (create_register, ger_or_create_user, get_masters,
+                         get_masters_dates, get_masters_hours,
+                         get_masters_services, get_user)
 from helpers.states import OrderTrim
-from keyboards.inline.callback_datas import master_callback, date_callback, hour_callback, service_callback
-from keyboards.inline.choice_buttons import get_masters_keyboard, get_dates_keyboard, get_hours_keyboard, \
-    get_services_keyboard
+from keyboards.inline.callback_datas import (date_callback, hour_callback,
+                                             master_callback, service_callback)
+from keyboards.inline.choice_buttons import (get_dates_keyboard,
+                                             get_hours_keyboard,
+                                             get_masters_keyboard,
+                                             get_services_keyboard)
 from keyboards.reply_keyboard.choice_buttons import get_share_phone_keyboard
-from loader import dp, bot
+from loader import bot, dp
 
 
 @dp.message_handler(content_types=['contact'])

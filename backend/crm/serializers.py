@@ -1,7 +1,8 @@
 import datetime
 
-from .models import UserCRM, Master, WorkingHours, Price, Service, Register
 from rest_framework import serializers
+
+from .models import Master, Price, Register, Service, UserCRM, WorkingHours
 
 
 class UserCRMSerializer(serializers.ModelSerializer):

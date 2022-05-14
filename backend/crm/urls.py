@@ -1,8 +1,9 @@
-from django.urls import path, include
+from django.urls import include, path
 from rest_framework import routers
 
-from .views import UserViewSet, MasterViewSet, WorkingHoursViewSet, PriceViewSet, WorkingDatesView, WorkingHoursView, \
-    PriceView, UserCRMView, UserGetOrCreate, RegisterCreate
+from .views import (MasterViewSet, PriceView, PriceViewSet, RegisterCreate,
+                    UserCRMView, UserGetOrCreate, UserViewSet,
+                    WorkingDatesView, WorkingHoursView, WorkingHoursViewSet)
 
 app_name = 'crm'
 

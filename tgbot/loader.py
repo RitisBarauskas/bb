@@ -1,9 +1,8 @@
 import logging
-from decouple import config
 
 from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
-
+from decouple import config
 
 TG_TOKEN = config('TG_TOKEN')
 

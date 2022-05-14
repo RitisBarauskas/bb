@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import UserCRM, Master, Service, Price, WorkingHours, Register
+from .models import Master, Price, Register, Service, UserCRM, WorkingHours
 
 
 @admin.register(UserCRM)

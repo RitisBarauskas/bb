@@ -1,7 +1,6 @@
 import requests as requests
 from decouple import config
 
-
 URL_API_CRM = config('URL_API_CRM')
 
 
