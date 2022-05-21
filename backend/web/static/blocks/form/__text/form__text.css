@@ -1,0 +1,11 @@
+.form__text {
+    margin: 0;
+    padding: 0 10px 0 0;
+    text-align: right;
+    font-size: 14px;
+    line-height: 18px;
+    text-decoration-line: none;
+    font-family: 'Inter', 'Times New Roman', Times, serif;
+    font-weight: normal;
+    color: #868686;
+}

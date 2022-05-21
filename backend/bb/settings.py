@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'crm.apps.CrmConfig',
+    'crm',
+    'web',
 ]
 
 MIDDLEWARE = [
@@ -77,6 +78,7 @@ TEMPLATES = [
     },
 ]
 
+print(BASE_DIR)
 WSGI_APPLICATION = 'bb.wsgi.application'
 
 
@@ -93,6 +95,13 @@ DATABASES = {
         'PORT': config('DB_PORT'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 AUTH_USER_MODEL = 'crm.UserCRM'
 

@@ -1,0 +1,11 @@
+.form__title {
+    margin: 0 auto;
+    padding: 10px;
+    font-size: 18px;
+    line-height: 22px;
+    text-decoration-line: underline;
+    font-family: 'Inter', 'Times New Roman', Times, serif;
+    font-weight: bold;
+    color: #e5e5e5;
+    text-transform: uppercase;
+}

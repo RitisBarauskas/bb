@@ -1,0 +1,8 @@
+.desk {
+    margin: 0 auto;
+    padding: 0;
+    display: grid;
+    gap: 20px;
+    min-width: 1000px;
+    grid-template-columns: 1fr 1fr;
+}

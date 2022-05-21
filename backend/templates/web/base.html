@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../dj_static/pages/index.css">
+    <title>"Борис Бритва" барбершоп</title>
+</head>
+<body class="body">
+    <div class="page">
+        <header class="header">
+            <div class="header__title-box">
+                <h1 class="header__title">
+                    Борис Бритва
+                </h1>
+                <p class="header__subtitle">
+                    барбершоп
+                </p>
+            </div>
+            <div class="header__info-box">
+                <p class="header__phone">
+                    +7 (965) 565 33 33
+                </p>
+                <p class="header__text">
+                    Пермь, ул. Сибирская, 10 (2 этаж)
+                </p>
+            </div>
+        </header>
+        <main class="main">
+
+        {% include "web/nav.html" %}
+
+            {% block content %}
+                {# Содержимое блока #}
+            {% endblock %}
+
+        </main>
+        <footer class="footer">
+
+
+        </footer>
+    </div>
+</body>
+</html>

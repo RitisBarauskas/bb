@@ -1,0 +1,31 @@
+.dashboard__item {
+    height: 20px;
+    margin: 0 auto;
+    min-width: 100px;
+    padding: 0;
+    font-size: 14px;
+    line-height: 18px;
+    text-decoration-line: none;
+    font-family: 'Inter', 'Times New Roman', Times, serif;
+    font-weight: normal;
+    color: #e5e5e5;
+    text-transform: uppercase;
+    border: #868686 1px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.dashboard__item_rows2 {
+    height: 40px;
+    width: 400px;
+}
+
+.dashboard__item_rows3 {
+    height: 60px;
+}
+
+.dashboard__item_rows4 {
+    height: 80px;
+}

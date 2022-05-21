@@ -1,0 +1,16 @@
+.menu__link {
+    margin: 0 10px 0 0;
+    padding: 6px;
+    font-size: 14px;
+    line-height: 18px;
+    text-decoration-line: none;
+    font-family: 'Inter', 'Times New Roman', Times, serif;
+    font-weight: normal;
+    color: #e5e5e5;
+    text-transform: uppercase;
+    border: #868686 solid 1px;
+}
+
+.menu__link:hover {
+    border-color: #e5e5e5;
+}

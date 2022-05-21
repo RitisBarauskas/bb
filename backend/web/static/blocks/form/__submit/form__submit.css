@@ -1,0 +1,19 @@
+.form__submit {
+    margin: 0 auto;
+    padding: 10px;
+    width: fit-content;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 18px;
+    text-decoration-line: none;
+    font-family: 'Inter', 'Times New Roman', Times, serif;
+    font-weight: normal;
+    color: #e5e5e5;
+    background-color: black;
+    text-transform: uppercase;
+    border: 1px solid #868686;
+}
+
+.form__submit:hover {
+    border-color: #e5e5e5;
+}

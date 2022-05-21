@@ -1,0 +1,41 @@
+{% extends "web/base.html" %}
+{% block content %}
+    <section class="desk">
+        {% for master_id, dates in data.items %}
+        <form action="/work-hours" method="post" class="form">
+            <h2 class="form__title"> {{ dates.0.name }} - расписание</h2>
+            <label class="form__label">
+                <span class="form__text">Начало дня:</span>
+                <select id="time_begin" name="time_begin" class="form__select">
+                    {% for w_time in times %}
+                    <option class="form__select-option" value="{{ w_time }}">{{ w_time}}:00</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <label class="form__label">
+                <span class="form__text">Шаг записи:</span>
+                <select id="step" name="step" class="form__select">
+                    <option class="form__select-option" value="60">60 минут</option>
+                    <option class="form__select-option" value="30">30 минут</option>
+                </select>
+            </label>
+            <label class="form__label">
+                <span class="form__text">Окончание работы:</span>
+                <select id="time_end" name="time_end" class="form__select">
+                    {% for w_time in times %}
+                    <option class="form__select-option" value="{{ w_time }}">{{ w_time}}:00</option>
+                    {% endfor %}
+                </select>
+            </label>
+            {% for date_key, date_value in dates.1.items %}
+            <label class="form__label">
+                <span class="form__text">{{ date_value }}</span>
+                <input class="form__checkbox" name="{{ date_key }}" value="{{ date_value }}" type="checkbox">
+            </label>
+            {% endfor %}
+            <input type="hidden" name="master" id="master" value="1">
+            <input type="submit" class="form__submit" value="Сформировать">
+        </form>
+        {% endfor %}
+    </section>
+{% endblock %}

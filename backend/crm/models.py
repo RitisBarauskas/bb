@@ -91,6 +91,10 @@ class Master(models.Model):
         null=True,
         default=None,
     )
+    state = models.BooleanField(
+        'state',
+        default=True,
+    )
 
     class Meta:
         verbose_name = 'Мастер'

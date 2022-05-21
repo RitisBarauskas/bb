@@ -1,0 +1,9 @@
+.page {
+    margin: auto;
+    padding: 20px;
+    min-height: calc(100vh - 60px);
+    max-width: 1440px;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+}
