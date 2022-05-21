@@ -64,13 +64,13 @@ jobs:
           host: ${{ secrets.HOST_SERVER }}
           username: ${{ secrets.USER_SERVER }}
           key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             cd bb/infra
             docker pull ritisbarauskas/bb_django:latest
             docker pull ritisbarauskas/bb_tg_bot:latest
             docker-compose down
             cd ../
+            git pull
             touch .env
             echo DB_ENGINE=${{ secrets.DB_ENGINE }} > .env
             echo DB_NAME=${{ secrets.DB_NAME }} >> .env
