@@ -32,7 +32,7 @@ ALLOWED_HOSTS = [
     'borisbritva.website',
     'www.borisbritva.website',
     '127.0.0.1',
-    '195.161.68.7',
+    '51.250.111.101',
 ]
 
 CSRF_TRUSTED_ORIGINS = ['*']
@@ -45,13 +45,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'rest_framework',
     'crm.apps.CrmConfig',
-    'corsheaders',
 ]
 
 MIDDLEWARE = [
-    '**corsheaders.middleware.CorsMiddleware**',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
