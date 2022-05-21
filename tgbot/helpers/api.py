@@ -1,3 +1,5 @@
+import time
+
 import requests as requests
 from decouple import config
 
@@ -10,8 +12,12 @@ async def get_user(chat_id):
     """
 
     response = requests.get(URL_API_CRM + '/get-user/' + str(chat_id))
-
-    return response.json()
+    try:
+        return response.json()
+    except ConnectionError:
+        time.sleep(6)
+        print('OOOps... big ass!')
+        return response.json()
 
 
 async def ger_or_create_user(contact, chat):
