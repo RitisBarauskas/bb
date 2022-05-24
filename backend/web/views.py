@@ -1,9 +1,8 @@
 import datetime
-
 from django.shortcuts import render
 
-from helpers import generate_work_hours
-
+from web.helpers import generate_work_hours
+from crm.models import Master, WorkingHours
 
 def index(request):
     return render(request, 'web/index.html')
