@@ -66,9 +66,9 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd bb/infra
-            docker pull ritisbarauskas/bb_django:latest
-            docker pull ritisbarauskas/bb_tg_bot:latest
-            docker-compose down
+            sudo docker pull ritisbarauskas/bb_django:latest
+            sudo docker pull ritisbarauskas/bb_tg_bot:latest
+            sudo docker-compose down
             cd ../
             git pull
             touch .env
@@ -82,4 +82,4 @@ jobs:
             echo DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }} >> .env            
             echo URL_API_CRM=${{ secrets.URL_API_CRM }} >> .env            
             cd infra
-            docker-compose up -d
+            sudo docker-compose up -d
