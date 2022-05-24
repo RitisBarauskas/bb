@@ -1,7 +1,7 @@
 import datetime
 
-from django.shortcuts import render, HttpResponse
-from crm.models import WorkingHours, Master
+from django.shortcuts import render
+
 from helpers import generate_work_hours
 
 
