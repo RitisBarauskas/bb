@@ -4,5 +4,6 @@
     display: flex;
     flex-direction: column;
     min-width: 500px;
+    max-width: 800px;
     border: #868686 solid 1px;
 }

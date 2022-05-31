@@ -6,5 +6,5 @@ app_name = 'web'
 
 urlpatterns = [
     path('work-hours/', views.workhours, name='workhours'),
-    path('', views.index, name='index'),
+    path('<day>/', views.index, name='index'),
 ]

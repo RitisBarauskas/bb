@@ -4,4 +4,6 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    min-height: 150px;
+    height: 150px;
 }

@@ -195,6 +195,10 @@ class WorkingHours(models.Model):
         'state',
         default=True,
     )
+    step = models.IntegerField(
+        'step',
+        default=60,
+    )
 
     class Meta:
         verbose_name = 'Рабочие часы'

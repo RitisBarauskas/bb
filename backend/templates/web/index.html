@@ -1,44 +1,26 @@
 {% extends "web/base.html" %}
 {% block content %}
-    <div class="dashboard">
+{% for master, entries in data.items %}
+    <section class="dashboard">
         <h2 class="dashboard__title">
-            Никитос Юткин
+            {{ master.name }}
         </h2>
         <div class="dashboard__section">
             <ul class="dashboard__list">
-                <li class="dashboard__item">
-                    12:00
-                </li>
-                <li class="dashboard__item">
-                    12:30
-                </li>
-                <li class="dashboard__item">
-                    13:00
-                </li>
-                <li class="dashboard__item">
-                    14:00
-                </li>
-                <li class="dashboard__item">
-                    15:00
-                </li>
+                {% for entry in entries %}
+                    <li class="dashboard__item dashboard__item_rows-{{ entry.step }}">
+                        {{ entry.entry | date:"H:i" }}
+                    </li>
+                {% endfor %}
             </ul>
             <ul class="dashboard__list">
-                <li class="dashboard__item dashboard__item_rows2">
-                    Свободно
-                </li>
-                <li class="dashboard__item dashboard__item_rows4">
-                    Свободно
-                </li>
-                <li class="dashboard__item dashboard__item_rows2">
-                    Свободно
-                </li>
-                <li class="dashboard__item dashboard__item_rows4">
-                    Свободно
-                </li>
-                <li class="dashboard__item dashboard__item_rows4">
-                    Свободно
-                </li>
+                {% for entry in entries %}
+                    <li class="dashboard__item dashboard__item_rows-{{ entry.step }} dashboard__item_long">
+                        Свободно
+                    </li>
+                {% endfor %}
             </ul>
         </div>
-    </div>
+    </section>
+{% endfor %}
 {% endblock %}

@@ -1,5 +1,5 @@
 .dashboard__section {
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
     display: flex;
 }
