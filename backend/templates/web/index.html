@@ -9,7 +9,7 @@
             <ul class="dashboard__list">
                 {% for entry in entries %}
                     <li class="dashboard__item dashboard__item_rows-{{ entry.step }}">
-                        {{ entry.entry | date:"H:i" }}
+                        {{ entry.entry | date:"d.m.y - H:i" }}
                     </li>
                 {% endfor %}
             </ul>
