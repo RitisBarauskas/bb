@@ -63,7 +63,6 @@ def workhours(request):
         for master in masters:
             day = WorkingHours.objects.filter(
                 master=master,
-                state=True,
             ).only('entry_date').order_by('-entry_date').first()
 
             if day:

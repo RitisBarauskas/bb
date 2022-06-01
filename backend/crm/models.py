@@ -209,6 +209,7 @@ class WorkingHours(models.Model):
     def __str__(self):
         return f'{self.master} - {self.entry}'
 
+
 class Register(models.Model):
     """
     Журнал записи
@@ -292,6 +293,11 @@ class Register(models.Model):
         verbose_name = 'Запись'
         verbose_name_plural = 'Записи'
         db_table = 'crm_register'
+
+    def save(
+        self, force_insert=False, force_update=False, using=None, update_fields=None
+    ):
+        self.working_hour.state = False
 
     def __str__(self):
 

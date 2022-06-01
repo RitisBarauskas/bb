@@ -42,10 +42,8 @@ def get_dates_keyboard(dates):
         buttons.append(button)
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
-        buttons,
-        [
-            InlineKeyboardButton(text="Отмена", callback_data="next")
-        ]
+        buttons[:3],
+        buttons[3:],
     ])
 
     return keyboard
@@ -64,13 +62,11 @@ def get_hours_keyboard(hours):
             text=time,
             callback_data=hour_callback.new(id=hour['id'], entry_hour=time)
         )
-        buttons.append([button])
+        buttons.append(button)
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
-        buttons,
-        [
-            InlineKeyboardButton(text="Отмена", callback_data="next")
-        ]
+        buttons[:5],
+        buttons[5:],
     ])
 
     return keyboard
@@ -92,10 +88,10 @@ def get_services_keyboard(master_services):
         buttons.append(button)
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
-        buttons,
-        [
-            InlineKeyboardButton(text="Отмена", callback_data="next")
-        ]
+        buttons[:1],
+        buttons[1:2],
+        buttons[2:3],
+        buttons[3:4],
     ])
 
     return keyboard
