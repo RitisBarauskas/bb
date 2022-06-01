@@ -64,7 +64,7 @@ def get_hours_keyboard(hours):
             text=time,
             callback_data=hour_callback.new(id=hour['id'], entry_hour=time)
         )
-        buttons.append(button)
+        buttons.append([button])
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
         buttons,

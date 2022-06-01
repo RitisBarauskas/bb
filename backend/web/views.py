@@ -6,7 +6,7 @@ from crm.models import Master, WorkingHours
 
 
 def index(request, day=None):
-    today = datetime.date.today() + datetime.timedelta(days=1)
+    today = datetime.date.today()
 
     masters = Master.objects.filter(state=True)
     result = {}
