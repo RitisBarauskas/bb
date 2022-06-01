@@ -294,10 +294,11 @@ class Register(models.Model):
         verbose_name_plural = 'Записи'
         db_table = 'crm_register'
 
-    def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
-    ):
+    def save(self, *args, **kwargs):
+        # Изменим статус рабочих часов при сохранении.
         self.working_hour.state = False
+
+        return super(Register, self).save(*args, **kwargs)
 
     def __str__(self):
 

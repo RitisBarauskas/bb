@@ -87,7 +87,7 @@ class WorkingHoursView(views.APIView):
             entry_date=entry_date,
             state=True,
             entry__gte=datetime.now(),
-        ).all()
+        )
 
         serializer = WorkingHoursSerializer(
             instance=queryset,
